@@ -10,7 +10,7 @@ Haven't got there yet champ
 - You need `cmake` & `make`
 
 **Then (from project root):**
-- `chmod +x dev.sh`
+- `chmod +x bootstrap.sh`
 - run `./bootstrap.sh`
 > ⚠️ For fellow VS Code enthusiasts:
 > if you want OOTB intellisense support so that VS Code doesn't shit its pants over `yaml-cpp` not being found,
