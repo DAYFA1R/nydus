@@ -38,7 +38,7 @@ cmake --preset conan-release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 # Optional VSCode setup
 if [ "$INCLUDE_VSCODE" = true ]; then
-  ln -sf "$BUILD_DIR/compile_commands.json" compile_commands.json
+  ln -sf "$BUILD_DIR/Release/compile_commands.json" compile_commands.json
 
   if [ ! -f .vscode/settings.json ]; then
     mkdir -p .vscode
