@@ -1,0 +1,15 @@
+#include "command.h"
+
+// Lets you pass in a reference to a string, and allows you to get a subcommand by
+const Command* Command::findSubcommand(const std::string& argument) const {
+  // looking through each subcommand
+  for (const Command& subcommand : subcommands) {
+    // matching by the subcommand name OR argument value
+    if (subcommand.argument == argument || subcommand.argument == argument) {
+      // returning a reference to the subcommand if its found
+      return &subcommand;
+    }
+    // or a nullptr if not
+    return nullptr;
+  }
+}
