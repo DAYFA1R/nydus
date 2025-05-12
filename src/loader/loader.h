@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../command/command.h"
 #include <string>
 #include <yaml-cpp/yaml.h>
+
+#include "../command/command.h"
 
 std::vector<Command> loadCommandTree(const std::string& filepath);
 
