@@ -14,7 +14,7 @@
 
 Example:
 ```
-$ nyd nyd i
+$ nyd proj1 i
 → Switching to /home/user/dayfa1r/projects/nydus/
 → Running ./bootstrap.sh
 ```
@@ -46,16 +46,24 @@ Haven't got there yet champ
 Define your command hierarchy in a YAML list like so:
 ```
 commands:
-  - name: "nydus"
-    arg: "nyd"
+  - name: "project1"
+    arg: "proj1"
     cd: "/home/user/dayfa1r/projects/nydus/"
-    exec: "echo 'These are things I want to run on every command in this project'"
+    exec: "cat README.md"
     commands:
       - name: "Install"
         arg: "i"
         exec: "./bootstrap.sh"
+  - name: "project2"
+    arg: "proj2"
+    cd: "/home/user/dayfa1r/projects/portfolio/"
+    exec: "echo 'You're in project 2'"
+    commands:
+      - name: "Install"
+        arg: "i"
+        exec: "npm install"
 ```
 
-In this example, you can run `nyd nyd i` from any directory, and it will:
-1. Switch to `/home/user/dayfa1r/projects/nydus/`
-2. Run `./bootstrap.sh`
+In this example, you can run `nyd proj2 i` from any directory, and it will:
+1. Switch to `/home/user/dayfa1r/projects/portfolio/`
+2. Run `npm install`
