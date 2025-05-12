@@ -3,3 +3,5 @@ build/
 .vscode
 CMakeUserPresets.json
 compile_commands.json
+Testing
+coverage.info
