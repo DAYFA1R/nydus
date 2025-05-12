@@ -23,7 +23,13 @@ jobs:
 
     - name: Install Conan packages
       run: |
-        conan install . --build=missing -s build_type=Debug
+        conan install . \
+          --build=missing \
+          --profile:host=default \
+          --profile:build=default \
+          --settings=build_type=Debug \
+          --generator=CMakeToolchain \
+          --generator=CMakeDeps
 
     - name: Configure project
       run: |
