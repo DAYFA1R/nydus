@@ -20,7 +20,7 @@ jobs:
         sudo apt install -y lcov
         pip install conan
         conan profile detect
-        
+
     - name: Install Conan packages
       run: |
         conan install . \
@@ -35,6 +35,7 @@ jobs:
       run: |
         cmake -B build/Debug -S . \
           -DCMAKE_BUILD_TYPE=Debug \
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
           -DCMAKE_TOOLCHAIN_FILE=build/Debug/generators/conan_toolchain.cmake
 
     - name: Build
