@@ -1,0 +1,51 @@
+name: Build & Test with Coverage
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y lcov
+        pip install conan
+        conan profile detect
+
+    - name: Install Conan packages
+      run: |
+        conan install . --build=missing -s build_type=Debug
+
+    - name: Configure project
+      run: |
+        cmake -B build/Debug -S . \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake
+
+    - name: Build
+      run: cmake --build ./build/Debug
+
+    - name: Run tests
+      run: cd build/Debug && ctest --output-on-failure
+
+    - name: Generate coverage
+      run: |
+        cd build/Debug
+        lcov --capture --directory . --output-file coverage.info --ignore-errors inconsistent,unsupported,format
+        lcov --remove coverage.info '/usr/*' '*/tests/*' '*/.conan2/*' --output-file coverage_filtered.info
+
+    - name: Upload to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: build/Debug/coverage_filtered.info
+        fail_ci_if_error: true
