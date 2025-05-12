@@ -1,4 +1,3 @@
-#define MOCK_RUNNER
 #include <gtest/gtest.h>
 #include "../src/app/app.h"
 #include "../src/command/command.h"
@@ -101,11 +100,12 @@ commands:
   }
 }
 
-#ifdef MOCK_RUNNER
-namespace runner {
-  void executeCommand(const Command* command) {
-    if (!command) return; // prevent segfault
-    MockRunner::Execute(command);
+
+namespace {
+  namespace runner {
+    void executeCommand(const Command* command) {
+      if (!command) return;
+      MockRunner::Execute(command);
+    }
   }
 }
-#endif
