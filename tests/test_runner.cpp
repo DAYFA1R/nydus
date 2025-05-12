@@ -32,3 +32,14 @@ TEST(RunnerTest, ChangesDirectoryIfCdProvided) {
     runner::executeCommand(&cmd);
   });
 }
+
+TEST(RunnerTest, ForceCoverageExecutionPath) {
+  Command cmd;
+  cmd.name = "CoverageTouch";
+  cmd.argument = "cov";
+  cmd.cd = std::filesystem::current_path().string();
+  cmd.pre = "echo pre-cov";
+  cmd.exec = "echo exec-cov";
+
+  runner::executeCommand(&cmd);
+}
