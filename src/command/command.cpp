@@ -1,5 +1,7 @@
 #include "command.h"
 
+#include <iostream>
+
 const Command* resolveCommand(const std::vector<Command>& commands, const std::vector<std::string>& arguments) {
   const Command* currentCommand = nullptr; // default to no command found
   const std::vector<Command>* currentLevel = &commands; // set the currentLevel as the parsed command vector
@@ -23,8 +25,13 @@ const Command* resolveCommand(const std::vector<Command>& commands, const std::v
       }
     }
     // if we didn't find jack
-    if (!matched || currentLevel == nullptr) {
+    if (!matched) {
+      std::cout << "✗ No match found for: " << argument << "\n";
       return nullptr; // send back a nullptr
+    }
+
+    if (currentLevel == nullptr) {
+      break; // stop processing further arguments
     }
   }
   return currentCommand; // otherwise send back the successfully found command
