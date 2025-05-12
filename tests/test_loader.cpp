@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "../src/loader/loader.h"
 #include <yaml-cpp/yaml.h>
+#include <filesystem>
 #include <fstream>
 
 TEST(LoaderTest, ParsesSimpleCommand) {
