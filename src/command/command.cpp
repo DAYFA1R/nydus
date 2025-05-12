@@ -13,14 +13,12 @@ const Command* resolveCommand(const std::vector<Command>& commands, const std::v
       if (command.name == argument || command.argument == argument) {
         currentCommand = &command; // set the current command to this one
         matched = true; // because we totally found it!
-
         // now, if there are child commands
         if (command.subcommands.has_value()) {
           currentLevel = &command.subcommands.value(); // set the currentLevel to the value of the subcommands vector
         } else {
           currentLevel = nullptr; // otherwise set the currentLevel to nullptr since we don't need to keep going deeper
         }
-        
         break; // leave the loop since something matched
       }
     }
