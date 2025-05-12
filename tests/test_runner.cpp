@@ -42,4 +42,27 @@ TEST(RunnerTest, ForceCoverageExecutionPath) {
   cmd.exec = "echo exec-cov";
 
   runner::executeCommand(&cmd);
+} 
+
+TEST(RunnerTest, FailsToChangeDirectory) {
+  Command cmd;
+  cmd.name = "FailCD";
+  cmd.argument = "failcd";
+  cmd.cd = "/nonexistent/path/that/should/fail";
+  cmd.exec = "echo should not run";
+
+  EXPECT_NO_THROW({
+    runner::executeCommand(&cmd);
+  });
+}
+
+TEST(RunnerTest, SkipsExecWhenMissing) {
+  Command cmd;
+  cmd.name = "NoExec";
+  cmd.argument = "noexec";
+  cmd.exec = std::nullopt;
+
+  EXPECT_NO_THROW({
+    runner::executeCommand(&cmd);
+  });
 }
