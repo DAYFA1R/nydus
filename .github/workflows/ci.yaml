@@ -54,6 +54,11 @@ jobs:
     - name: Upload to Codecov
       uses: codecov/codecov-action@v5
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: build/Debug/coverage_filtered.info
+        file: build/Debug/coverage_filtered.info
         fail_ci_if_error: true
+        verbose: true
+        flags: unittests
+        commit_sha: ${{ github.sha }}
+        name: linux-tests
+      env:
+        CODECOV_DEBUG: 1
