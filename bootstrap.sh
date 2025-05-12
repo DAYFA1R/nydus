@@ -2,6 +2,8 @@
 set -e
 
 INCLUDE_VSCODE=false
+REFRESH_BUILD_DIR=false
+BUILD_TYPE="Release"
 BUILD_DIR="build"
 
 # Parse arguments
@@ -11,34 +13,46 @@ for arg in "$@"; do
       INCLUDE_VSCODE=true
       shift
       ;;
+    --debug)
+      BUILD_TYPE="Debug"
+      shift
+      ;;
+    --refresh)
+      REFRESH_BUILD_DIR=true
+      shift
+      ;;
     *)
-      echo "Usage: ./bootstrap.sh [--vscode]"
+      echo "Usage: ./bootstrap.sh [--vscode] [--debug] [--refresh]"
       exit 1
       ;;
   esac
 done
 
-echo "Setting up Conan + CMake environment..."
-
 # Clean and recreate build directory
-rm -rf "$BUILD_DIR"
-mkdir -p "$BUILD_DIR"
+if [ "$INCLUDE_VSCODE" = true ]; then
+  rm -rf "$BUILD_DIR"
+  mkdir -p "$BUILD_DIR"
+fi
 
-# Run conan install into build/Release
+# Run conan install into build/$BUILD_TYPE
+echo "Setting up Conan + CMake environment..."
 conan install . \
   --build=missing \
   --profile:host=default \
   --profile:build=default \
-  --settings=build_type=Release \
+  --settings=build_type=$BUILD_TYPE \
   --generator=CMakeToolchain \
   --generator=CMakeDeps
 
 # Run cmake preset from root, NOT inside build dir
-cmake --preset conan-release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+cmake -B "$BUILD_DIR/$BUILD_TYPE" -S . \
+  -DCMAKE_TOOLCHAIN_FILE="$BUILD_DIR/$BUILD_TYPE/generators/conan_toolchain.cmake" \
+  -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 # Optional VSCode setup
 if [ "$INCLUDE_VSCODE" = true ]; then
-  ln -sf "$BUILD_DIR/Release/compile_commands.json" compile_commands.json
+  ln -sf "$BUILD_DIR/$BUILD_TYPE/compile_commands.json" compile_commands.json
 
   if [ ! -f .vscode/settings.json ]; then
     mkdir -p .vscode
@@ -46,7 +60,7 @@ if [ "$INCLUDE_VSCODE" = true ]; then
 {
   "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
   "C_Cpp.default.compileCommands": "\${workspaceFolder}/compile_commands.json",
-  "cmake.buildDirectory": "\${workspaceFolder}/build/Release"
+  "cmake.buildDirectory": "\${workspaceFolder}/$BUILD_DIR/$BUILD_TYPE"
 }
 EOL
     echo "VSCode settings initialized."
