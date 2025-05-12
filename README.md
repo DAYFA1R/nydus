@@ -20,7 +20,11 @@ $ nyd proj1 i
 ```
 
 ## How to install (for use)
-Haven't got there yet champ
+Haven't automated the script yet but you can do this:
+- run `./bootstrap.sh`
+- build using the generated conan preset via CLI or your IDE
+- `mv ./build/Release/nyd` to whatever `\bin` you prefer
+
 
 ## How to install (for development)
 ### Setup
@@ -43,27 +47,24 @@ Haven't got there yet champ
 - run `./build/Release/nyd`
 
 ## Usage
-Define your command hierarchy in a YAML list like so:
+Define your command hierarchy in a YAML list like so, as recursively as you want:
 ```
 commands:
-  - name: "project1"
-    arg: "proj1"
+  - name: "Nydus"
+    argument: "nydus"
     cd: "/home/user/dayfa1r/projects/nydus/"
-    exec: "cat README.md"
+    exec: "./bootstrap.sh"
+
+  - name: "Portfolio"
+    arg: "dayf"
     commands:
-      - name: "Install"
-        arg: "i"
-        exec: "./bootstrap.sh"
-  - name: "project2"
-    arg: "proj2"
-    cd: "/home/user/dayfa1r/projects/portfolio/"
-    exec: "echo 'You're in project 2'"
-    commands:
-      - name: "Install"
-        arg: "i"
-        exec: "npm install"
+      - name: "Run"
+        argument: "r"
+        cd: "~/Projects/DAYFA1R/portfolio"
+        pre: "nvm use --lts"
+        exec: "npm run"
 ```
 
-In this example, you can run `nyd proj2 i` from any directory, and it will:
-1. Switch to `/home/user/dayfa1r/projects/portfolio/`
-2. Run `npm install`
+In this example, you can run `nyd dayf r` from any directory, and it will:
+1. Switch to `/users/dayfa1r/projects/portfolio/`
+2. Run `npm run`
