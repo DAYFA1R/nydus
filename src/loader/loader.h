@@ -5,6 +5,7 @@
 
 #include "../command/command.h"
 
+Command parseCommandNode(const YAML::Node& node);
 std::vector<Command> loadCommandTree(const std::string& filepath);
 
 // Util helper for safely pulling out YAML fields

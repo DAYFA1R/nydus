@@ -2,6 +2,18 @@
 #include <iostream>
 
 Command parseCommandNode(const YAML::Node& node) {
+  // YAML validation
+  if (!node["name"] || !node["name"].IsScalar()) {
+    throw std::runtime_error("Missing or invalid 'name' field");
+  }
+  if (!node["argument"] || !node["argument"].IsScalar()) {
+    throw std::runtime_error("Missing or invalid 'argument' field");
+  }
+  if (node["commands"] && !node["commands"].IsSequence()) {
+    throw std::runtime_error("'commands' must be a list");
+  }
+
+  // Assign YAML data to command object
   Command command;
   // safely pull the values out of the YAML nodes using the safeGet helper function
   command.name = safeGet<std::string>(node, "name");

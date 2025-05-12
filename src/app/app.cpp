@@ -19,6 +19,11 @@ namespace app {
     std::vector<Command> topLevelCommands = loadCommandTree(utils::expandTilde(yamlConfig));
     // Find the command
     const Command* matchedCommand = resolveCommand(topLevelCommands, arguments);
+    // if no command is matched
+    if (!matchedCommand) {
+      std::cerr << "Exiting, no command input match\n";
+      return 1;
+    }
     // And finally, execute the found command!
     std::cout << CLR_GOLD << "⚠ WARNING: " << CLR_PURPLE << "nydus v0.0.1 " << CLR_LIME << "has spawned!" << CLR_RESET << "\n";
     runner::executeCommand(matchedCommand);
