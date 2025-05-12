@@ -1,17 +1,29 @@
 #include <iostream>
-#include <yaml-cpp/yaml.h>
+#include <vector>
+#include <string>
 
-int main() {
-    // Find and load YAML
+#include "loader/loader.h"
+#include "command/command.h"
 
-    // Traverse YAML and create Segment tree
 
-    // Parse args and map to Segments
-    
+int main(int argc, char** argv) {
+    if (argc < 2) { // if not enough args to resolve
+        std::cerr << "Usage: nyd <command> [subcommand...]\n"; // send usage example
+        return 1; // exit with error status
+    }
 
-    //placeholder to test YAML lib
-    YAML::Node config = YAML::Load("{name: Conan, type: Package}");
-    std::cout << "Name: " << config["name"].as<std::string>() << "\n";
-    std::cout << "blep \n";
+    // Parse CLI args
+    std::vector<std::string> arguments(argv + 1, argv + argc);
+
+    // Load YAML and create the Command tree
+    std::vector<Command> topLevelCommands = loadCommandTree("~/.nydus.yaml");
+    // TODO: I'm not sure tilde works like this, we'll see
+
+    // Find the command
+    const Command* matchedCommand = resolveCommand(topLevelCommands, arguments);
+
+    // And finally, execute the found command!
+    // TODO: implement executeCommand(matchedCommand)
+
     return 0;
 }
