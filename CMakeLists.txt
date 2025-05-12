@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.15)
 project(nydus)
+# Set compiler settings for C++
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 enable_testing()
 
 # Set a default build type if none was specified
@@ -7,10 +11,6 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build." FORCE)
 endif()
 
-# Set compiler settings for C++
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Find and reference the conan deps
 find_package(yaml-cpp REQUIRED)

@@ -100,9 +100,12 @@ commands:
   }
 }
 
-namespace runner {
-  void executeCommand(const Command* command) {
-    if (!command) return; // prevent segfault
-    MockRunner::Execute(command);
+
+namespace {
+  namespace runner {
+    void executeCommand(const Command* command) {
+      if (!command) return;
+      MockRunner::Execute(command);
+    }
   }
 }

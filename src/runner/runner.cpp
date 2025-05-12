@@ -29,7 +29,7 @@ namespace runner {
   
     // Run the prefix command if its there
     if (command->pre && !command->pre->empty()) {
-      std::cout << CLR_GOLD << "→ " << CLR_PURPLE << "Moving Overlords: " << CLR_RESET << *command->pre << "\n";
+      std::cout << CLR_GOLD << "→ " << CLR_PINK << "Moving Overlords: " << CLR_RESET << *command->pre << "\n";
       std::system(command->pre->c_str());
     }
   
