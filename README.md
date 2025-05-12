@@ -67,4 +67,4 @@ commands:
 
 In this example, you can run `nyd dayf r` from any directory, and it will:
 1. Switch to `/users/dayfa1r/projects/portfolio/`
-2. Run `npm run`
+2. Run `nvm use --lts && npm run`
