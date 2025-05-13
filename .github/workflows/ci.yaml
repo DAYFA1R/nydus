@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ main ]git s
 
 jobs:
   test:
@@ -57,3 +57,10 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: build/Debug/lcov.info
         fail_ci_if_error: true
+        name: github-actions-upload
+        flags: unittests
+        verbose: true
+      env:
+        CI: true
+        GITHUB_ACTIONS: true
+        CODECOV_DEBUG: 1
