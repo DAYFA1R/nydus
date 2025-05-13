@@ -49,11 +49,13 @@ jobs:
         cd build/Debug
         lcov --capture --directory . --output-file coverage.info \
           --ignore-errors inconsistent,unsupported,format,mismatch
-        lcov --remove coverage.info '/usr/*' '*/tests/*' '*/.conan2/*' --output-file coverage_filtered.info
+        lcov --remove coverage.info '/usr/*' '*/tests/*' '*/.conan2/*' --output-file lcov.info
+        ls -lh lcov.info  # <- debug check
+        cd ../../
 
     - name: Upload to Codecov
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        files: build/Debug/coverage_filtered.info
+        files: build/Debug/lcov.info
         fail_ci_if_error: true
