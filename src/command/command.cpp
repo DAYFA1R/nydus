@@ -13,7 +13,7 @@ const Command* resolveCommand(const std::vector<Command>& commands, const std::v
     // look at the current command
     for (const Command& command : *currentLevel) {
       // if the command is this one
-      if (command.name == argument || command.argument == argument) {https://github.com/DAYFA1R/nydus/tree/main/.github/workflows
+      if (command.name == argument || command.argument == argument) {
         currentCommand = &command; // set the current command to this one
         matched = true; // because we totally found it!
         // now, if there are child commands
