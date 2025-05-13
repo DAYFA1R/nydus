@@ -1,4 +1,5 @@
-# `nydus`: a YAML-powered CLI aliasing tool for project commands
+# `nydus` [![Build passing](https://github.com/DAYFA1R/nydus/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/DAYFA1R/nydus/actions/workflows/ci.yaml) [![codecov](https://codecov.io/gh/DAYFA1R/nydus/graph/badge.svg?token=KEPS4OGVYM)](https://codecov.io/gh/DAYFA1R/nydus)
+> **a YAML-powered CLI aliasing tool for project commands**
 
 `nydus` is a YAML-powered CLI aliasing tool that lets developers define shortcut commands for common project tasks — like install, build, and run — that can be executed from anywhere on your system.
 
