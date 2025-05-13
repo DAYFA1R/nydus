@@ -2,13 +2,12 @@
 
 #include <iostream>
 
-// Matches args to an actual command in the tree
 const Command* resolveCommand(const std::vector<Command>& commands, const std::vector<std::string>& arguments) {
   const Command* currentCommand = nullptr; // default to no command found
   const std::vector<Command>* currentLevel = &commands; // set the currentLevel as the parsed command vector
   
   // for each argument provided in the CLI
-  for (const auto& argument : arguments) {
+  for (const std::string& argument : arguments) {
     bool matched = false; // set default state (because we haven't found anything yet)
     // look at the current command
     for (const Command& command : *currentLevel) {
