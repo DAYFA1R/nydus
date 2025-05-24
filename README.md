@@ -1,7 +1,16 @@
-# `nydus` [![Build passing](https://github.com/DAYFA1R/nydus/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/DAYFA1R/nydus/actions/workflows/ci.yaml) [![codecov](https://codecov.io/gh/DAYFA1R/nydus/graph/badge.svg?token=KEPS4OGVYM)](https://codecov.io/gh/DAYFA1R/nydus)
+# `nydus` [![Release Binaries](https://github.com/DAYFA1R/nydus/actions/workflows/release.yaml/badge.svg)](https://github.com/DAYFA1R/nydus/actions/workflows/release.yaml)
+ [![Build passing](https://github.com/DAYFA1R/nydus/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/DAYFA1R/nydus/actions/workflows/ci.yaml) [![codecov](https://codecov.io/gh/DAYFA1R/nydus/graph/badge.svg?token=KEPS4OGVYM)](https://codecov.io/gh/DAYFA1R/nydus)
 > **a YAML-powered CLI aliasing tool for project commands**
 
-`nydus` is a YAML-powered CLI aliasing tool that lets developers define shortcut commands for common project tasks — like install, build, and run — that can be executed from anywhere on your system.
+**Direct download:** `nydus` is a YAML-powered CLI aliasing tool that lets developers define shortcut commands for common project tasks — like install, build, and run — that can be executed from anywhere on your system.
+[![Download macOS](https://img.shields.io/badge/download-macOS-lightgrey)](https://github.com/DAYFA1R/nydus/releases/latest/download/nydus-macos-latest.tar.gz) [![Download Ubuntu](https://img.shields.io/badge/download-ubuntu-orange)](https://github.com/DAYFA1R/nydus/releases/latest/download/nydus-ubuntu-latest.tar.gz)
+
+## Install
+Make sure you replace `<YOUR OS>` with either `macos` or `ubuntu`
+```
+curl -L https://github.com/DAYFA1R/nydus/releases/download/v1.0.0/nydus-<YOUR OS>-latest.tar.gz | tar xz
+sudo mv nyd /usr/local/bin/
+```
 
 ## How It Works
 
@@ -20,14 +29,14 @@ $ nyd proj1 i
 → Running ./bootstrap.sh
 ```
 
-## How to install (for use)
+## How to build from source (for use)
 Haven't automated the script yet but you can do this:
 - run `./bootstrap.sh`
 - build using the generated conan preset via CLI or your IDE
 - `mv ./build/Release/nyd` to whatever `\bin` you prefer
 
 
-## How to install (for development)
+## How to build from source (for development)
 ### Setup
 **Pre-requisites**
 - Install the `conan` package manager (to install the `yaml-cpp` dep)
