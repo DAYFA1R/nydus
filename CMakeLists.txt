@@ -40,15 +40,17 @@ PRIVATE
 nydus_core
 )
 
-# Build tests
-file(GLOB_RECURSE NYD_TESTS CONFIGURE_DEPENDS tests/*.cpp)
-add_executable(nydus_tests ${NYD_TESTS})
-target_link_libraries(nydus_tests # link Nydus Core to GTest
-  PRIVATE
-    nydus_core
-    gtest::gtest
-)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  # Build tests
+  file(GLOB_RECURSE NYD_TESTS CONFIGURE_DEPENDS tests/*.cpp)
+  add_executable(nydus_tests ${NYD_TESTS})
+  target_link_libraries(nydus_tests # link Nydus Core to GTest
+    PRIVATE
+      nydus_core
+      gtest::gtest
+  )
 
-# Google Test include and test discovery
-include(GoogleTest)
-gtest_discover_tests(nydus_tests)
+  # Google Test include and test discovery
+  include(GoogleTest)
+  gtest_discover_tests(nydus_tests)
+endif()

@@ -1,0 +1,74 @@
+name: Release Binaries
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install dependencies (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt update
+          sudo apt install -y cmake build-essential python3-pip
+          pip3 install conan
+          conan profile detect
+
+      - name: Install dependencies (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install cmake conan
+          conan profile detect
+
+      - name: Install Conan packages
+        run: |
+          mkdir -p build/${{ matrix.os }}
+          conan install . \
+            --build=missing \
+            --profile:host=default \
+            --profile:build=default \
+            --settings=build_type=Release \
+            --output-folder=build/${{ matrix.os }} \
+            --generator=CMakeToolchain \
+            --generator=CMakeDeps
+
+      - name: Check Conan toolchain file existence
+        run: |
+          ls -l build/${{ matrix.os }}/build/Release/generators/conan_toolchain.cmake
+
+      - name: Configure CMake
+        run: |
+          cmake -B build/${{ matrix.os }} -S . \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE=build/${{ matrix.os }}/build/Release/generators/conan_toolchain.cmake \
+            ${{ matrix.os == 'macos-latest' && '-DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"' || '' }}
+
+      - name: Build binary
+        run: |
+          cmake --build build/${{ matrix.os }}
+          strip build/${{ matrix.os }}/nyd || true
+
+      - name: Create tarball
+        run: |
+          mkdir -p dist
+          tar -czvf dist/nydus-${{ matrix.os }}.tar.gz -C build/${{ matrix.os }} nyd
+
+      - name: Upload to GitHub Releases
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/nydus-${{ matrix.os }}.tar.gz
