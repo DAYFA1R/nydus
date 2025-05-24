@@ -1,9 +1,9 @@
 # `nydus` [![Release Binaries](https://github.com/DAYFA1R/nydus/actions/workflows/release.yaml/badge.svg)](https://github.com/DAYFA1R/nydus/actions/workflows/release.yaml) [![Build passing](https://github.com/DAYFA1R/nydus/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/DAYFA1R/nydus/actions/workflows/ci.yaml) [![codecov](https://codecov.io/gh/DAYFA1R/nydus/graph/badge.svg?token=KEPS4OGVYM)](https://codecov.io/gh/DAYFA1R/nydus)
+[![Download macOS](https://img.shields.io/badge/download-macOS-lightgrey)](https://github.com/DAYFA1R/nydus/releases/latest/download/nydus-macos-latest.tar.gz) [![Download Ubuntu](https://img.shields.io/badge/download-ubuntu-orange)](https://github.com/DAYFA1R/nydus/releases/latest/download/nydus-ubuntu-latest.tar.gz)
 > **a YAML-powered CLI aliasing tool for project commands**
 
  `nydus` is a YAML-powered CLI aliasing tool that lets developers define shortcut commands for common project tasks — like install, build, and run — that can be executed from anywhere on your system.
 
-**Direct download:** [![Download macOS](https://img.shields.io/badge/download-macOS-lightgrey)](https://github.com/DAYFA1R/nydus/releases/latest/download/nydus-macos-latest.tar.gz) [![Download Ubuntu](https://img.shields.io/badge/download-ubuntu-orange)](https://github.com/DAYFA1R/nydus/releases/latest/download/nydus-ubuntu-latest.tar.gz)
 
 ## Install
 Make sure you replace `<YOUR OS>` with either `macos` or `ubuntu`
