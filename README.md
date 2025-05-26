@@ -48,7 +48,7 @@ $ nyd proj1 i
 
 #### Build & run from source (for development)
 - run `./bootstrap.sh --debug`
-- - you can add `--refresh` to auto delete the old build folder if you're regenerating the build often
+  - you can add `--refresh` to auto delete the old build folder if you're regenerating the build often
 > ⚠️ For fellow VS Code enthusiasts:
 > if you want OOTB intellisense support so that VS Code doesn't shit its pants over `yaml-cpp` not being found,
 > you can optionally pass in a --vscode flag to the setup script like:
