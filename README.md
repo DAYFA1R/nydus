@@ -41,21 +41,19 @@ $ nyd proj1 i
 - You need `cmake` & `make`
 - From the repo root: `chmod +x bootstrap.sh`
 
-#### How to build from source (for use)
+#### Build & run from source (for actual use)
 - run `./bootstrap.sh` (it defaults to Release build without any additional flags provided)
+- run `cmake --build ./build/Release`
+- run `./build/Release/nyd` OR `mv` the binary to a `/bin` directory
 
-#### Build from source (for development)
+#### Build & run from source (for development)
 - run `./bootstrap.sh --debug`
 > ⚠️ For fellow VS Code enthusiasts:
 > if you want OOTB intellisense support so that VS Code doesn't shit its pants over `yaml-cpp` not being found,
 > you can optionally pass in a --vscode flag to the setup script like:
 > `./bootstrap.sh --vscode` :\)
-
-### Build
-- run `cmake --build --preset conan-release`
-
-### Run
-- run `./build/Release/nyd`
+- run `cmake --build ./build/Debug`
+- run `./build/Debug/nyd`
 
 ## Usage
 Define your command hierarchy in a YAML list like so, as recursively as you want:

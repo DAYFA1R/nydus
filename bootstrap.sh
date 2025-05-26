@@ -29,7 +29,7 @@ for arg in "$@"; do
 done
 
 # Clean and recreate build directory
-if [ "$INCLUDE_VSCODE" = true ]; then
+if [ "$REFRESH_BUILD_DIR" = true ]; then
   rm -rf "$BUILD_DIR"
   mkdir -p "$BUILD_DIR"
 fi
@@ -40,15 +40,13 @@ conan install . \
   --build=missing \
   --profile:host=default \
   --profile:build=default \
-  --settings=build_type=$BUILD_TYPE \
+  --settings=build_type="$BUILD_TYPE" \
   --generator=CMakeToolchain \
   --generator=CMakeDeps
 
-# Run cmake preset from root, NOT inside build dir
 cmake -B "$BUILD_DIR/$BUILD_TYPE" -S . \
-  -DCMAKE_TOOLCHAIN_FILE="$BUILD_DIR/$BUILD_TYPE/generators/conan_toolchain.cmake" \
-  -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
-  -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+  -DCMAKE_BUILD_TYPE="$BUILD_TYPE" \
+  -DCMAKE_TOOLCHAIN_FILE="$BUILD_DIR/$BUILD_TYPE/generators/conan_toolchain.cmake"
 
 # Optional VSCode setup
 if [ "$INCLUDE_VSCODE" = true ]; then
