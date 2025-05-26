@@ -14,6 +14,9 @@ curl -L https://github.com/DAYFA1R/nydus/releases/download/v1.0.0/nydus-<YOUR OS
 sudo mv nyd /usr/local/bin/
 ```
 
+### Compile from source
+Scroll down to the "Development" section
+
 ## How It Works
 
 1. You define project-specific commands in a YAML file.
@@ -31,22 +34,18 @@ $ nyd proj1 i
 → Running ./bootstrap.sh
 ```
 
-## How to build from source (for use)
-Haven't automated the script yet but you can do this:
-- run `./bootstrap.sh`
-- build using the generated conan preset via CLI or your IDE
-- `mv ./build/Release/nyd` to whatever `\bin` you prefer
-
-
-## How to build from source (for development)
+## Development
 ### Setup
 **Pre-requisites**
 - Install the `conan` package manager (to install the `yaml-cpp` dep)
 - You need `cmake` & `make`
+- From the repo root: `chmod +x bootstrap.sh`
 
-**Then (from project root):**
-- `chmod +x bootstrap.sh`
-- run `./bootstrap.sh`
+#### How to build from source (for use)
+- run `./bootstrap.sh` (it defaults to Release build without any additional flags provided)
+
+#### Build from source (for development)
+- run `./bootstrap.sh --debug`
 > ⚠️ For fellow VS Code enthusiasts:
 > if you want OOTB intellisense support so that VS Code doesn't shit its pants over `yaml-cpp` not being found,
 > you can optionally pass in a --vscode flag to the setup script like:
