@@ -85,5 +85,6 @@ I built this tool because I want to streamline context switching on different pr
 Another objective of this program is to remove the redundancy of having to traverse your file system. If you are on a system where you have multiple projects relating to multiple organizations, some of which are for sandbox/demo purposes and others which are full fledged applications, you probably have some sort of semantic folder structure to keep things separate. That's cool and all, but as of late I've become conscious of how much `cd`ing and tab completion I'm doing to jump around my system throughout my day to day.
 
 ### Yes, the name is a reference to Starcraft
-Considering how the nydus network works for Zerg, I thought it was a good reference :) 
+Considering how the nydus network works for Zerg, I thought it was a good reference :)
+
 ![Nydus Canal](https://static.wikia.nocookie.net/starcraft/images/8/81/NydusCanal_SCR_Game1.gif/revision/latest?cb=20220108113046)
