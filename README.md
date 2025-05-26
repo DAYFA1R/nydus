@@ -3,9 +3,11 @@
 
  `nydus` is a YAML-powered CLI aliasing tool that lets developers define shortcut commands for common project tasks — like install, build, and run — that can be executed from anywhere on your system.
 
+## Install
+### Direct download
 [![Download macOS](https://img.shields.io/badge/download-macOS-lightgrey)](https://github.com/DAYFA1R/nydus/releases/latest/download/nydus-macos-latest.tar.gz) [![Download Ubuntu](https://img.shields.io/badge/download-ubuntu-orange)](https://github.com/DAYFA1R/nydus/releases/latest/download/nydus-ubuntu-latest.tar.gz)
 
-## Install
+### curl
 Make sure you replace `<YOUR OS>` with either `macos` or `ubuntu`
 ```
 curl -L https://github.com/DAYFA1R/nydus/releases/download/v1.0.0/nydus-<YOUR OS>-latest.tar.gz | tar xz
